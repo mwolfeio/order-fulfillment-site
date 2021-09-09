@@ -1,3 +1,12 @@
+@import url("https://rsms.me/inter/inter.css");
+html {
+  font-family: "Inter", sans-serif;
+}
+@supports (font-variation-settings: normal) {
+  html {
+    font-family: "Inter var", sans-serif;
+  }
+}
 html,
 body {
   padding: 0;
@@ -20,6 +29,9 @@ main {
   width: 100%;
   max-width: 1328px;
   padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 /* Buttons-------------------- */
 button {
@@ -62,6 +74,33 @@ button.secondary {
   background: #fafbfc;
 }
 
+/* tab-------------------- */
+.tab-wrapper > *:not(:first-child) {
+  margin-left: 16px;
+}
+.tab {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 29px;
+  /* identical to box height, or 207% */
+
+  display: flex;
+  align-items: center;
+
+  /* Text 2 */
+  height: 43px;
+  color: #4e5d78;
+  padding: 0 14px;
+  background: #fafbfc;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.active-tab {
+  background: #f4f8ff;
+  color: #4388f8;
+}
 /* Header-------------------- */
 header {
   height: 100px;
@@ -231,12 +270,292 @@ p.auth-footer a {
   color: #b0b7c3;
 }
 
+/* List ------------------- */
+.List-wrapper {
+  background: #fafbfc;
+  border-radius: 20px;
+  padding: 35px;
+}
+.List-wrapper h1 {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 29px;
+  /* identical to box height, or 161% */
+
+  display: flex;
+  align-items: center;
+
+  /* Text 1 */
+
+  color: #04141d;
+}
+.List-wrapper h1 span.sub-title {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 29px;
+  /* identical to box height, or 161% */
+
+  display: flex;
+  align-items: center;
+
+  /* Text 4 */
+
+  color: #b0b7c3;
+}
+
+ul.list-contaiener {
+  background: white;
+  border-radius: 15px;
+  padding: 35px;
+  margin-top: 32px;
+  list-style-type: none;
+}
+ul.list-contaiener li {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 2fr 2fr 2fr;
+  padding: 0 24px;
+}
+ul.list-contaiener > *:not(:last-child) {
+  margin-bottom: 12px;
+}
+ul.list-contaiener li.list-header {
+  background: #fafbfc;
+  border-radius: 15px;
+
+  height: 51px;
+}
+ul.list-contaiener li.list-header p {
+  margin: 0;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 24px;
+  /* or 200% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  /* Text 2 */
+
+  color: #4e5d78;
+}
+
+ul.list-contaiener li.list-item {
+  height: 80px;
+  transition: 0.15s ease;
+  border-radius: 15px;
+}
+ul.list-contaiener li.list-item:hover {
+  background: #f4f8ff;
+}
+ul.list-contaiener li.list-item h6 {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 26px;
+  /* or 24px */
+
+  /* Text 2 */
+
+  color: #4e5d78;
+  color: #4e5d78;
+  margin: 0;
+}
+ul.list-contaiener li.list-item p {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 16px;
+  /* or 290% */
+
+  color: #b0b7c3;
+  margin: 0;
+}
+/* Modal-------------------- */
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: max(100%, 100vw);
+  width: 100vw;
+  background: rgba(50, 59, 75, 0.3);
+  backdrop-filter: blur(5px);
+  /* display: flex;
+  justify-content: center; */
+}
+.modal-wrapper {
+  margin: auto;
+  margin-top: 10%;
+  width: 100%;
+  max-width: 475px;
+  padding: 30px;
+  /* height: 100%; */
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 20px;
+}
+.modal-wrapper h2 {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 29px;
+  /* identical to box height, or 161% */
+
+  display: flex;
+  align-items: center;
+
+  /* Text 2 */
+
+  color: #4e5d78;
+  margin-bottom: 0;
+}
+.modal-wrapper p {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 23px;
+  /* or 164% */
+
+  display: flex;
+  align-items: center;
+
+  color: #b0b7c3;
+  margin-top: 8px;
+}
+.modal-ino {
+  border-bottom: 1px solid #f3f3f3;
+}
+.divider-line {
+  height: 100px;
+  border-right: 1px solid #f3f3f3;
+}
+
+.modal-product-list {
+  padding: 0;
+}
+.modal-product-list > *:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.order-product {
+  background: #fafbfc;
+  border-radius: 15px;
+  padding: 16px;
+  width: 100%;
+  border: 2px solid #fafbfc;
+}
+.order-product.active-product {
+  border: 2px solid #4388f8;
+  background: #e5f1fd;
+}
+.order-product h4 {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+
+  /* Text 2 */
+
+  color: #4e5d78;
+  margin: 0;
+}
+.order-product p {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 21px;
+  /* or 175% */
+
+  display: flex;
+  align-items: center;
+
+  /* Text 4 */
+
+  color: #b0b7c3;
+  margin: 2px;
+}
+
+.checkbox {
+  background: #fafbfc;
+  /* Primary 1 */
+  display: block;
+
+  border: 1px solid #4388f8;
+  box-sizing: border-box;
+  border-radius: 5px;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  min-height: 22px;
+}
+
+.order-product img {
+  width: 145px;
+  height: 100px;
+  border-radius: 10px;
+  margin: 0 16px;
+}
+
+.modal-wrapper input {
+  height: 58px;
+  width: 100%;
+  padding: 17px;
+
+  background: #ffffff;
+  /* BG 2 */
+
+  border: 1px solid #f3f3f3;
+  box-sizing: border-box;
+  border-radius: 15px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 29px;
+  /* or 181% */
+  transition: 0.15s ease;
+
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  color: #4e5d78;
+  outline: none;
+}
+.modal-wrapper input:hover {
+  border: 1px solid #377dff;
+}
+.modal-wrapper input:focus {
+  border: 1px solid #377dff;
+  box-shadow: 0px 12px 23px rgba(55, 125, 255, 0.06);
+}
+.modal-wrapper input::placeholder {
+  color: #b0b7c3;
+}
+
 /* Orders-------------------- */
-.orders-wrappe {
+.orders-wrapper {
   width: 100%;
   box-sizing: border-box;
-  max-width: 1190px;
+  max-width: 1120px;
   padding: 16px 35px;
+  z-index: 100;
 }
 
 /* FLEXBOX-------------------- */
@@ -279,4 +598,7 @@ p.auth-footer a {
 /* OTHER--------------------- */
 .fill-vertical {
   height: Calc(100vh - 100px);
+}
+.self-center {
+  align-self: center;
 }
