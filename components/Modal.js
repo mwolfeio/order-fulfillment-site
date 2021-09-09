@@ -1,9 +1,14 @@
 import { useState } from "react";
-import Product from "./Product.js";
+import FulfillmentComfirmation from "./FulfillmentComfirmation.js";
+import FulfillmentSelection from "./FulfillmentSelection.js";
 
 const Header = (props) => {
   const [selected, setSelected] = useState([]);
-  const [confirm, setConfirm] = useState(false);
+  const [shippingMethod, setShippingMethod] = useState("DHL");
+  const [shippingNumber, setShippingNumber] = useState("");
+  const [page, setPage] = useState(0);
+
+  let order = props.order;
 
   console.log("selected: ", selected);
 
@@ -26,8 +31,20 @@ const Header = (props) => {
     <div className="modal-background">
       <div className="modal-wrapper">
         <div className="flex-center-btw">
-          <h1>Order: 1111</h1>
-          <button onClick={props.close} className="secondary">
+          <h1>
+            Order:{" "}
+            <span style={{ color: "#4E5D78", marginLeft: "8px" }}>
+              {order.number}
+            </span>
+          </h1>
+          <button
+            onClick={() => {
+              setPage(0);
+              props.close();
+            }}
+            style={{ width: "43px" }}
+            className="secondary"
+          >
             X
           </button>
         </div>
@@ -35,89 +52,53 @@ const Header = (props) => {
           <div style={{ width: "40%" }}>
             <h2>Address</h2>
             <p>
-              Matt Wolfe
+              {order.customer}
               <br />
-              16 Black Creek Lane
+              {order.shippingAddress.address1}
               <br />
-              St. Louis MO 63124
+              {order.shippingAddress.city} {order.shippingAddress.state}{" "}
+              {order.shippingAddress.zip}
               <br />
-              United States
+              {order.shippingAddress.country}
             </p>
           </div>
           <div className="divider-line"></div>
           <div style={{ width: "40%" }}>
             <h2>Information</h2>
             <p>
-              September 1, 2021
+              {order.date}, 2021
               <br />
-              at 12:40pm
+              {order.time}
               <br />
               from: Online Store
-              <br />{" "}
+              <br />
+              {order.shippingNumber
+                ? `Shipping #: ${order.shippingNumber}`
+                : ""}
+              <br />
             </p>
           </div>
         </div>
-        {!confirm ? (
-          <div>
-            <div style={{ margin: "30px 0" }}>
-              <h2>Select Products</h2>
-              <p>
-                Select all the products in this order you would like to mark as
-                fulfilled.
-              </p>
-            </div>
-            <ul className="modal-product-list">
-              <Product
-                selected={selected}
-                toggleSelected={toggleSelected}
-                product={"test"}
-              />
-            </ul>
-            <div className="flex-center-btw" style={{ marginTop: "30px" }}>
-              <button
-                onClick={props.close}
-                className="secondary"
-                style={{ width: "Calc(50% - 8px)" }}
-              >
-                Close
-              </button>
-              <button
-                onClick={() => setConfirm(true)}
-                className="primary"
-                style={{ width: "Calc(50% - 8px)" }}
-              >
-                Next
-              </button>
-            </div>
-          </div>
+        {!page ? (
+          <FulfillmentSelection
+            order={order}
+            selected={selected}
+            toggleSelected={toggleSelected}
+            close={() => {
+              setPage(0);
+              props.close();
+            }}
+            next={() => setPage(1)}
+          />
         ) : (
-          <div>
-            <div style={{ margin: "30px 0" }}>
-              <h2>Shipping Informaiton</h2>
-              <p>
-                Please enter the shipping information for this order. This
-                information will be sent to the customer.
-              </p>
-            </div>
-            <input type="text" placeholder="Enter the shipping number" />
-
-            <div className="flex-center-btw" style={{ marginTop: "30px" }}>
-              <button
-                onClick={() => setConfirm(false)}
-                className="secondary"
-                style={{ width: "Calc(50% - 8px)" }}
-              >
-                Back
-              </button>
-              <button
-                onClick={props.close}
-                className="primary"
-                style={{ width: "Calc(50% - 8px)" }}
-              >
-                Fulfill Order
-              </button>
-            </div>
-          </div>
+          <FulfillmentComfirmation
+            back={() => setPage(0)}
+            submit={() => console.log("submit")}
+            shippingMethod={shippingMethod}
+            setShippingMethod={setShippingMethod}
+            shippingNumber={shippingNumber}
+            setShippingNumber={setShippingNumber}
+          />
         )}
       </div>
     </div>

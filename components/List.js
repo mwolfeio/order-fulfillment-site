@@ -3,13 +3,257 @@ import { useState } from "react";
 import ListItem from "./ListItem.js";
 import Modal from "./Modal.js";
 
-const Header = () => {
+const orders = [
+  // {
+  //   number: "LT1009",
+  //   date: "September 9",
+  //   time: "8:35am",
+  //   customer: "Matt Wolfe",
+  //   shippingAddress: {
+  //     address1: "16 Black Creek Lane",
+  //     city: "St. Louis",
+  //     state: "MO",
+  //     zip: "63124",
+  //     country: "United States",
+  //   },
+  //   items: 1,
+  //   fulfilled: false,
+  //   shippingNumber: "",
+  //   products: [
+  //     {
+  //       name: "Oak Leaves Border Doormat",
+  //       qt: "1",
+  //       img:
+  //         "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/4_499x338.jpg?v=1629318983",
+  //       message: "Arjun",
+  //       sku: "PM103",
+  //     },
+  //   ],
+  // },
+  {
+    number: "LT1009",
+    date: "September 1",
+    time: "12:40am",
+    customer: "Matt Wolfe",
+    shippingAddress: {
+      address1: "16 Black Creek Lane",
+      city: "St. Louis",
+      state: "MO",
+      zip: "63124",
+      country: "United States",
+    },
+    items: 1,
+    fulfilled: true,
+    shippingNumber: "1234",
+    products: [
+      {
+        name: "Products Victorian Border Doormat",
+        qt: "1",
+        img:
+          "//cdn.shopify.com/s/files/1/0560/2577/6295/products/131_1032x700.png?v=1629743213",
+        message: "TestMat",
+        sku: "PM112",
+      },
+    ],
+  },
+  {
+    number: "LT1008",
+    date: "September 1",
+    time: "7:30am",
+    customer: "Matt Wolfe",
+    shippingAddress: {
+      address1: "16 Black Creek Lane",
+      city: "St. Louis",
+      state: "MO",
+      zip: "63124",
+      country: "United States",
+    },
+    items: 1,
+    fulfilled: false,
+    shippingNumber: "",
+    products: [
+      {
+        name: "Oak Leaves Border Doormat",
+        qt: "1",
+        img:
+          "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/4_499x338.jpg?v=1629318983",
+        message: "2323",
+        sku: "PM103",
+      },
+    ],
+  },
+  {
+    number: "LT1007",
+    date: "September 1",
+    time: "7:24am",
+    customer: "Matt Wolfe",
+    shippingAddress: {
+      address1: "16 Black Creek Lane",
+      city: "St. Louis",
+      state: "MO",
+      zip: "63124",
+      country: "United States",
+    },
+    items: 1,
+    fulfilled: true,
+    shippingNumber: "2222222",
+    products: [
+      {
+        name: "English Ironwork Border Doormat",
+        qt: "1",
+        img:
+          "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/8499336670_499x338.png?v=1629743118",
+        message: "2222222",
+        sku: "PM107",
+      },
+    ],
+  },
+  {
+    number: "LT1006",
+    date: "September 1",
+    time: "7:02am",
+    customer: "Matt Wolfe",
+    shippingAddress: {
+      address1: "16 Black Creek Lane",
+      city: "St. Louis",
+      state: "MO",
+      zip: "63124",
+      country: "United States",
+    },
+    items: 1,
+    fulfilled: true,
+    shippingNumber: "11111111",
+    products: [
+      {
+        name: "Asian Border Doormat",
+        qt: "1",
+        img:
+          "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/141_499x338.png?v=1629743154",
+        message: "2222222",
+        sku: "PM111",
+      },
+    ],
+  },
+  {
+    number: "LT1005",
+    date: "August 31",
+    time: "11:53pm",
+    customer: "Matt Wolfe",
+    shippingAddress: {
+      address1: "16 Black Creek Lane",
+      city: "St. Louis",
+      state: "MO",
+      zip: "63124",
+      country: "United States",
+    },
+    items: 1,
+    fulfilled: true,
+    shippingNumber: "112345Z2345",
+    products: [
+      {
+        name: "Falling Leaves Border Doormat",
+        qt: "1",
+        img:
+          "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/3_499x338.jpg?v=1629318496",
+        message: "Dz nuts",
+        sku: "PM104",
+      },
+    ],
+  },
+  {
+    number: "LT1004",
+    date: "September 1",
+    time: "11:05pm",
+    customer: "Matt Wolfe",
+    shippingAddress: {
+      address1: "16 Black Creek Lane",
+      city: "St. Louis",
+      state: "MO",
+      zip: "63124",
+      country: "United States",
+    },
+    items: 1,
+    fulfilled: true,
+    shippingNumber: "112345Z2345",
+    products: [
+      {
+        name: "Victorian Border Doormat",
+        qt: "1",
+        img:
+          "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/131_499x338.png?v=1629743213",
+        message: "Tesrerer",
+        sku: "PM112",
+      },
+    ],
+  },
+  {
+    number: "LT1002",
+    date: "August 31",
+    time: "7:47pm",
+    customer: "Matt Wolfe",
+    shippingAddress: {
+      address1: "16 Black Creek Lane",
+      city: "St. Louis",
+      state: "MO",
+      zip: "63124",
+      country: "United States",
+    },
+    items: 1,
+    fulfilled: true,
+    shippingNumber: "123",
+    products: [
+      {
+        name: "Medallion Corners Doormat",
+        qt: "1",
+        img:
+          "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/111_499x338.png?v=1629498291",
+        message: "314",
+        sku: "PM113",
+      },
+    ],
+  },
+  {
+    number: "LT1001",
+    date: "August 20",
+    time: "6:47pm",
+    customer: "Matt Wolfe",
+    shippingAddress: {
+      address1: "16 Black Creek Lane",
+      city: "St. Louis",
+      state: "MO",
+      zip: "63124",
+      country: "United States",
+    },
+    items: 1,
+    fulfilled: true,
+    shippingNumber: "123",
+    products: [
+      {
+        name: "Medallion Corners Doormat",
+        qt: "1",
+        img:
+          "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/111_499x338.png?v=1629498291",
+        message: "314",
+        sku: "Test",
+      },
+    ],
+  },
+];
+
+const Header = (props) => {
   const [modal, setModal] = useState(false);
+  const [activeOrder, setActiveOrder] = useState({});
+
+  console.log(activeOrder);
 
   const closeModal = () => {
     setModal(false);
+    setActiveOrder({});
   };
-  const openModal = () => {
+  const openModal = (orderNumber) => {
+    let order = orders.find((o) => o.number === orderNumber);
+
+    setActiveOrder(order);
     setModal(true);
   };
 
@@ -33,9 +277,18 @@ const Header = () => {
           <p>Shipping #</p>
           <p>Actoin</p>
         </li>
-        <ListItem open={openModal} />
+        {orders.map((order) => {
+          if (props.filter && order.fufilled !== props.filter) return;
+          return (
+            <ListItem
+              open={openModal}
+              active={!order.fulfilled}
+              order={order}
+            />
+          );
+        })}
       </ul>
-      <Modal active={modal} close={closeModal} />
+      <Modal active={modal} order={activeOrder} close={closeModal} />
     </div>
   );
 };

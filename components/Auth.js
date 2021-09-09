@@ -9,7 +9,6 @@ const Header = () => {
 
   const signIn = (e) => {
     e.preventDefault();
-    console.log("Signing in");
     auth
       .signInWithEmailAndPassword(email, password)
 
@@ -42,7 +41,9 @@ const Header = () => {
         )}
         <p className="auth-footer">
           Don't have an account yet?{"  "}
-          <a href="mailto:matt@mwolfe.io">Contact us</a>
+          <a style={{ marginLeft: "4px" }} href="mailto:matt@mwolfe.io">
+            Contact us
+          </a>
         </p>
       </form>
     </div>

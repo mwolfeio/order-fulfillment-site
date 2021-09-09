@@ -60,11 +60,9 @@ button {
   transition: 0.15s ease;
   cursor: pointer;
 }
-
 button:hover {
   box-shadow: 0px 23px 44px rgba(176, 183, 195, 0.14);
 }
-
 button.primary {
   color: #ffffff;
   background: #4388f8;
@@ -73,7 +71,10 @@ button.secondary {
   color: #b0b7c3;
   background: #fafbfc;
 }
-
+button[disabled] {
+  color: #e2e7ef;
+  background: #fafbfc;
+}
 /* tab-------------------- */
 .tab-wrapper > *:not(:first-child) {
   margin-left: 16px;
@@ -351,6 +352,7 @@ ul.list-contaiener li.list-item {
   height: 80px;
   transition: 0.15s ease;
   border-radius: 15px;
+  cursor: pointer;
 }
 ul.list-contaiener li.list-item:hover {
   background: #f4f8ff;
@@ -455,6 +457,11 @@ ul.list-contaiener li.list-item p {
   padding: 16px;
   width: 100%;
   border: 2px solid #fafbfc;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+.order-product:hover {
+  background: #e5f1fd;
 }
 .order-product.active-product {
   border: 2px solid #4388f8;
@@ -504,6 +511,15 @@ ul.list-contaiener li.list-item p {
   height: 22px;
   min-width: 22px;
   min-height: 22px;
+}
+.active-product div.checkbox:after {
+  transform: translate(5px, 0px) rotate(45deg);
+  display: block;
+  content: "";
+  height: 12px;
+  width: 6px;
+  border-bottom: 3px solid #4388f8;
+  border-right: 3px solid #4388f8;
 }
 
 .order-product img {
@@ -556,6 +572,46 @@ ul.list-contaiener li.list-item p {
   max-width: 1120px;
   padding: 16px 35px;
   z-index: 100;
+}
+
+/* Slector-------------------- */
+.selector {
+  height: 43px;
+  background: #fafbfc;
+  border-radius: 15px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+.selector > * {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 29px;
+  /* or 207% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+
+  color: #b0b7c3;
+  transition: 0.15s ease;
+}
+.active-method {
+  color: white;
+  background: #4388f8;
+}
+.selector > *:hover {
+  background: #f4f8ff;
+  color: #4388f8;
+}
+.selector > *:not(:last-child) {
+  border-right: 1px solid #f3f3f3;
 }
 
 /* FLEXBOX-------------------- */
