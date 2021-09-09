@@ -1,4 +1,5 @@
 import { useState } from "react";
+import _ from "lodash";
 import FulfillmentComfirmation from "./FulfillmentComfirmation.js";
 import FulfillmentSelection from "./FulfillmentSelection.js";
 
@@ -10,22 +11,13 @@ const Header = (props) => {
 
   let order = props.order;
 
-  console.log("selected: ", selected);
-
   const toggleSelected = (product) => {
-    let productsArr = selected;
-    let index = productsArr.indexOf(product);
-    console.log("included: ", productsArr.includes(product));
-
-    productsArr.includes(product)
-      ? productsArr.splice(index, 1)
-      : productsArr.push(product);
-    console.log("new arr: ", productsArr);
-
-    setSelected(productsArr);
+    setSelected(
+      selected.includes(product)
+        ? selected.filter((item) => item.name !== product.name)
+        : [...selected, product]
+    );
   };
-
-  if (!props.active) return <div></div>;
 
   return (
     <div className="modal-background">
@@ -83,7 +75,7 @@ const Header = (props) => {
           <FulfillmentSelection
             order={order}
             selected={selected}
-            toggleSelected={toggleSelected}
+            setSelected={toggleSelected}
             close={() => {
               setPage(0);
               props.close();

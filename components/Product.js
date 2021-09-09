@@ -11,11 +11,13 @@ const Header = (props) => {
   //
   let product = props.product;
 
+  console.log("selected product :", props.selected);
+
   return (
     <li
-      onClick={() => setActive(!active)}
+      onClick={props.setSelected}
       className={`flex-center-center order-product ${
-        active && !props.fulfilled ? "active-product" : ""
+        props.selected && !props.fulfilled ? "active-product" : ""
       }`}
     >
       {!props.fulfilled ? <div className={`checkbox`}></div> : ""}

@@ -17,8 +17,7 @@ const orders = [
   //     country: "United States",
   //   },
   //   items: 1,
-  //   fulfilled: false,
-  //   shippingNumber: "",
+
   //   products: [
   //     {
   //       name: "Oak Leaves Border Doormat",
@@ -27,7 +26,8 @@ const orders = [
   //         "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/4_499x338.jpg?v=1629318983",
   //       message: "Arjun",
   //       sku: "PM103",
-  //     },
+  //   fulfilled: false,
+  //   shippingNumber: "",  //     },
   //   ],
   // },
   {
@@ -43,8 +43,7 @@ const orders = [
       country: "United States",
     },
     items: 1,
-    fulfilled: true,
-    shippingNumber: "1234",
+
     products: [
       {
         name: "Products Victorian Border Doormat",
@@ -53,6 +52,8 @@ const orders = [
           "//cdn.shopify.com/s/files/1/0560/2577/6295/products/131_1032x700.png?v=1629743213",
         message: "TestMat",
         sku: "PM112",
+        fulfilled: true,
+        shippingNumber: "1234",
       },
     ],
   },
@@ -69,8 +70,7 @@ const orders = [
       country: "United States",
     },
     items: 1,
-    fulfilled: false,
-    shippingNumber: "",
+
     products: [
       {
         name: "Oak Leaves Border Doormat",
@@ -79,6 +79,8 @@ const orders = [
           "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/4_499x338.jpg?v=1629318983",
         message: "2323",
         sku: "PM103",
+        fulfilled: false,
+        shippingNumber: "",
       },
     ],
   },
@@ -95,8 +97,7 @@ const orders = [
       country: "United States",
     },
     items: 1,
-    fulfilled: true,
-    shippingNumber: "2222222",
+
     products: [
       {
         name: "English Ironwork Border Doormat",
@@ -105,6 +106,8 @@ const orders = [
           "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/8499336670_499x338.png?v=1629743118",
         message: "2222222",
         sku: "PM107",
+        fulfilled: true,
+        shippingNumber: "2222222",
       },
     ],
   },
@@ -121,8 +124,7 @@ const orders = [
       country: "United States",
     },
     items: 1,
-    fulfilled: true,
-    shippingNumber: "11111111",
+
     products: [
       {
         name: "Asian Border Doormat",
@@ -131,6 +133,8 @@ const orders = [
           "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/141_499x338.png?v=1629743154",
         message: "2222222",
         sku: "PM111",
+        fulfilled: true,
+        shippingNumber: "11111111",
       },
     ],
   },
@@ -147,8 +151,7 @@ const orders = [
       country: "United States",
     },
     items: 1,
-    fulfilled: true,
-    shippingNumber: "112345Z2345",
+
     products: [
       {
         name: "Falling Leaves Border Doormat",
@@ -157,6 +160,8 @@ const orders = [
           "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/3_499x338.jpg?v=1629318496",
         message: "Dz nuts",
         sku: "PM104",
+        fulfilled: true,
+        shippingNumber: "112345Z2345",
       },
     ],
   },
@@ -173,8 +178,7 @@ const orders = [
       country: "United States",
     },
     items: 1,
-    fulfilled: true,
-    shippingNumber: "112345Z2345",
+
     products: [
       {
         name: "Victorian Border Doormat",
@@ -183,6 +187,8 @@ const orders = [
           "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/131_499x338.png?v=1629743213",
         message: "Tesrerer",
         sku: "PM112",
+        fulfilled: true,
+        shippingNumber: "112345Z2345",
       },
     ],
   },
@@ -199,8 +205,7 @@ const orders = [
       country: "United States",
     },
     items: 1,
-    fulfilled: true,
-    shippingNumber: "123",
+
     products: [
       {
         name: "Medallion Corners Doormat",
@@ -209,6 +214,8 @@ const orders = [
           "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/111_499x338.png?v=1629498291",
         message: "314",
         sku: "PM113",
+        fulfilled: true,
+        shippingNumber: "123",
       },
     ],
   },
@@ -225,8 +232,7 @@ const orders = [
       country: "United States",
     },
     items: 1,
-    fulfilled: true,
-    shippingNumber: "123",
+
     products: [
       {
         name: "Medallion Corners Doormat",
@@ -235,6 +241,8 @@ const orders = [
           "https://cdn.shopify.com/s/files/1/0560/2577/6295/products/111_499x338.png?v=1629498291",
         message: "314",
         sku: "Test",
+        fulfilled: true,
+        shippingNumber: "123",
       },
     ],
   },
@@ -275,20 +283,17 @@ const Header = (props) => {
           <p>items</p>
           <p>customer</p>
           <p>Shipping #</p>
-          <p>Actoin</p>
+          <p style={{ justifySelf: "end" }}>Action</p>
         </li>
         {orders.map((order) => {
-          if (props.filter && order.fufilled !== props.filter) return;
+          let isFulfilled = order.products.every((prod) => prod.fulfilled);
+          if (props.filter && isFulfilled !== props.filter) return;
           return (
-            <ListItem
-              open={openModal}
-              active={!order.fulfilled}
-              order={order}
-            />
+            <ListItem open={openModal} active={!isFulfilled} order={order} />
           );
         })}
       </ul>
-      <Modal active={modal} order={activeOrder} close={closeModal} />
+      {modal ? <Modal order={activeOrder} close={closeModal} /> : ""}
     </div>
   );
 };

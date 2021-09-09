@@ -74,6 +74,10 @@ button.secondary {
 button[disabled] {
   color: #e2e7ef;
   background: #fafbfc;
+  cursor: default;
+}
+button[disabled]:hover {
+  box-shadow: none;
 }
 /* tab-------------------- */
 .tab-wrapper > *:not(:first-child) {

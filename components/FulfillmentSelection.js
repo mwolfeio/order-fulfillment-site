@@ -2,6 +2,7 @@ import Product from "./Product.js";
 const Header = (props) => {
   let order = props.order;
 
+  console.log("selected FufillmentSelection: ", props.selected);
   return (
     <div>
       <div style={{ margin: "30px 0" }}>
@@ -12,14 +13,17 @@ const Header = (props) => {
         </p>
       </div>
       <ul className="modal-product-list">
-        {order.products.map((product) => (
-          <Product
-            fulfilled={order.fulfilled}
-            selected={props.selected}
-            toggleSelected={props.toggleSelected}
-            product={product}
-          />
-        ))}
+        {order.products.map((product) => {
+          let active = props.selected.includes(product);
+          return (
+            <Product
+              fulfilled={order.fulfilled}
+              selected={active}
+              setSelected={() => props.setSelected(product)}
+              product={product}
+            />
+          );
+        })}
       </ul>
       <div className="flex-center-btw" style={{ marginTop: "30px" }}>
         <button
@@ -31,9 +35,7 @@ const Header = (props) => {
         </button>
         {!order.fulfilled ? (
           <button
-            disabled={
-              props.shippingMethod && props.shippingNumber ? false : true
-            }
+            disabled={props.selected.length > 0 ? false : true}
             onClick={props.next}
             className="primary"
             style={{ width: "Calc(50% - 8px)" }}
