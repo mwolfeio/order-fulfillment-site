@@ -13,13 +13,8 @@ const Header = () => {
 
   return (
     <div className="orders-wrapper">
-      <Filters
-        filter={filter}
-        active={filter}
-        filters={filters}
-        handler={setFilter}
-      />
-      <List />
+      <Filters active={filter} filters={filters} handler={setFilter} />
+      <List filter={filter} />
     </div>
   );
 };

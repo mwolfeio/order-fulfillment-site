@@ -8,21 +8,31 @@ const Header = (props) => {
   // let toggle = () => {
   //   props.toggleSelected(props.product);
   // };
-  //
+
   let product = props.product;
+  let font = product.font ? product.font.replace("Font_", "") : "";
 
   console.log("selected product :", props.selected);
 
   return (
     <li
-      onClick={props.setSelected}
+      onClick={!product.fulfilled ? props.setSelected : null}
       className={`flex-center-center order-product ${
-        props.selected && !props.fulfilled ? "active-product" : ""
-      }`}
+        !product.fulfilled ? "not-disabled-product" : ""
+      } ${props.selected && !product.fulfilled ? "active-product" : ""}`}
     >
-      {!props.fulfilled ? <div className={`checkbox`}></div> : ""}
-      <div>
-        <div className="tiny-tab"></div>
+      {!product.fulfilled ? <div className={`checkbox`}></div> : ""}
+      <div className="product-img-wrapper">
+        <div className={`tiny-tab ${product.fulfilled ? "disabled-tab" : ""}`}>
+          {!product.fulfilled ? `QT ${product.qt}` : "Fulfilled"}
+        </div>
+        <div
+          className={`text-overlay flex-center-center ${font
+            .replace("&", "")
+            .replace(/\s/g, "-")}-font`}
+        >
+          {product.message}
+        </div>
         <img src={product.img} />
       </div>
       <div>
@@ -33,6 +43,14 @@ const Header = (props) => {
             style={{ color: "#4388F8", fontWeight: 700, marginLeft: "4px" }}
           >
             {product.message}
+          </span>
+        </p>
+        <p>
+          Font:
+          <span
+            style={{ color: "#4388F8", fontWeight: 700, marginLeft: "4px" }}
+          >
+            {font}
           </span>
         </p>
         <p>

@@ -15,7 +15,7 @@ const Header = (props) => {
           </div>
         ))}
       </div>
-      <div>Sort</div>
+      <div className="placeholder-text">Newest to Oldest</div>
     </div>
   );
 };

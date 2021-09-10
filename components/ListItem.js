@@ -6,7 +6,9 @@ const Header = (props) => {
 
   const selectOrder = () => {
     props.open(order.number);
+    // props.open(1);
   };
+  console.log(order.date);
 
   return (
     <li
@@ -33,7 +35,11 @@ const Header = (props) => {
         <p>{order.shippingAddress.address1}</p>
       </div>
       <div className="self-center">
-        <h6>{order.shippingNumber ? order.shippingNumber : "-"}</h6>
+        <h6>
+          {order.products && order.products[0].shippingNumber
+            ? order.products[0].shippingNumber
+            : "-"}
+        </h6>
         <p>Shipping Number</p>
       </div>
       <button

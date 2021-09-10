@@ -7,6 +7,20 @@ html {
     font-family: "Inter var", sans-serif;
   }
 }
+@font-face {
+  font-family: "Gilroy";
+  src: url("/fonts/Gilroy.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Olivia--Kevin";
+  src: url("/fonts/Olivia--Kevin.ttf");
+  font-style: medium;
+  font-weight: 500;
+  font-display: swap;
+}
 html,
 body {
   padding: 0;
@@ -133,6 +147,20 @@ header {
   cursor: default;
 
   /* Text 4 */
+
+  color: #b0b7c3;
+}
+
+.placeholder-text {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 23px;
+  /* or 164% */
+
+  display: flex;
+  align-items: center;
 
   color: #b0b7c3;
 }
@@ -392,20 +420,18 @@ ul.list-contaiener li.list-item p {
   top: 0;
   left: 0;
   right: 0;
-  height: max(100%, 100vw);
+  height: max(100%, 100vh);
   width: 100vw;
+  overflow-y: scroll;
   background: rgba(50, 59, 75, 0.3);
   backdrop-filter: blur(5px);
-  /* display: flex;
-  justify-content: center; */
 }
 .modal-wrapper {
   margin: auto;
-  margin-top: 10%;
+  margin: 10% auto;
   width: 100%;
   max-width: 475px;
   padding: 30px;
-  /* height: 100%; */
   box-sizing: border-box;
   background: #ffffff;
   border-radius: 20px;
@@ -454,17 +480,19 @@ ul.list-contaiener li.list-item p {
 .modal-product-list > *:not(:last-child) {
   margin-bottom: 8px;
 }
-
 .order-product {
   background: #fafbfc;
   border-radius: 15px;
   padding: 16px;
   width: 100%;
   border: 2px solid #fafbfc;
-  cursor: pointer;
   transition: 0.15s ease;
+  cursor: default;
 }
-.order-product:hover {
+.order-product.not-disabled-product {
+  cursor: pointer;
+}
+.order-product.not-disabled-product:hover {
   background: #e5f1fd;
 }
 .order-product.active-product {
@@ -531,6 +559,60 @@ ul.list-contaiener li.list-item p {
   height: 100px;
   border-radius: 10px;
   margin: 0 16px;
+}
+.product-img-wrapper {
+  position: relative;
+  /* width: 145px;
+  height: 100px;
+  padding: 0;
+  box-sizing: border-box; */
+}
+.product-img-wrapper .text-overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+  opacity: 0.8;
+  font-family: Serif;
+  font-weight: 600;
+}
+.product-img-wrapper .tiny-tab {
+  position: absolute;
+  top: -4px;
+  /* left: -4px; */
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  /* identical to box height, or 207% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  /* Icons & Fonts */
+
+  color: #ffffff;
+  padding: 0 8px;
+  background: #4388f8;
+  border-radius: 15px;
+}
+.product-img-wrapper .tiny-tab.disabled-tab {
+  color: #fff;
+  background: #b0b7c3;
+}
+
+.product-img-wrapper .text-overlay.Olivia--Kevin-font {
+  font-family: Olivia--Kevin;
+  font-size: 19px;
+  font-weight: 600;
+}
+.product-img-wrapper .text-overlay.Gilroy-font {
+  font-family: Gilroy;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .modal-wrapper input {

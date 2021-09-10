@@ -58,9 +58,7 @@ const Header = (props) => {
           <div style={{ width: "40%" }}>
             <h2>Information</h2>
             <p>
-              {order.date}, 2021
-              <br />
-              {order.time}
+              {order.fullDate}
               <br />
               from: Online Store
               <br />

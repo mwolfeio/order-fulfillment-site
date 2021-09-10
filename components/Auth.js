@@ -18,8 +18,6 @@ const Header = () => {
       });
   };
 
-  console.log("email: ", email);
-
   return (
     <div className="flex-center-center fill-vertical">
       <form className="auth-wrap" onSubmit={signIn}>

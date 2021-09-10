@@ -1,6 +1,7 @@
 import Product from "./Product.js";
 const Header = (props) => {
   let order = props.order;
+  let isFulfilled = order.products.every((prod) => prod.fulfilled);
 
   console.log("selected FufillmentSelection: ", props.selected);
   return (
@@ -17,7 +18,6 @@ const Header = (props) => {
           let active = props.selected.includes(product);
           return (
             <Product
-              fulfilled={order.fulfilled}
               selected={active}
               setSelected={() => props.setSelected(product)}
               product={product}
@@ -29,11 +29,11 @@ const Header = (props) => {
         <button
           onClick={props.close}
           className="secondary"
-          style={{ width: !order.fulfilled ? "Calc(50% - 8px)" : "100%" }}
+          style={{ width: !isFulfilled ? "Calc(50% - 8px)" : "100%" }}
         >
           Close
         </button>
-        {!order.fulfilled ? (
+        {!isFulfilled ? (
           <button
             disabled={props.selected.length > 0 ? false : true}
             onClick={props.next}
