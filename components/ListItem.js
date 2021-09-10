@@ -6,9 +6,7 @@ const Header = (props) => {
 
   const selectOrder = () => {
     props.open(order.number);
-    // props.open(1);
   };
-  console.log(order.date);
 
   return (
     <li
@@ -40,7 +38,12 @@ const Header = (props) => {
             ? order.products[0].shippingNumber
             : "-"}
         </h6>
-        <p>Shipping Number</p>
+        <p>
+          {" "}
+          {order.products && order.products[0].shippingMethod
+            ? order.products[0].shippingMethod
+            : "-"}
+        </p>
       </div>
       <button
         className={`self-center ${props.active ? "primary" : "secondary"}`}

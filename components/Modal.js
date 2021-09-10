@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { firestore } from "../lib/firebase";
 import FulfillmentComfirmation from "./FulfillmentComfirmation.js";
 import FulfillmentSelection from "./FulfillmentSelection.js";
 
@@ -14,6 +15,37 @@ const Header = ({ order, close }) => {
         ? selected.filter((item) => item.name !== product.name)
         : [...selected, product]
     );
+  };
+  const handleSubmit = () => {
+    console.log("submitting");
+    var batch = firestore.batch();
+
+    //for each product in the selected array
+    selected.forEach((product, i) => {
+      //find the order
+      let docRef = firestore.collection("orders").doc(order.number);
+      //add shipping numbers and shippin method to product
+      product.shippingNumber = shippingNumber;
+      product.shippingMethod = shippingMethod;
+      product.fulfilled = true;
+      //update products fifillment status and shpping code
+      batch.update(docRef, product);
+    });
+
+    //////////////its an array
+
+    //shut modal down
+    batch
+      .commit()
+      .then(() => {
+        console.log("Documents successfully updated!");
+        setPage(0);
+        close();
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(200).json(err);
+      });
   };
 
   return (
@@ -80,7 +112,7 @@ const Header = ({ order, close }) => {
         ) : (
           <FulfillmentComfirmation
             back={() => setPage(0)}
-            submit={() => console.log("submit")}
+            submit={handleSubmit}
             shippingMethod={shippingMethod}
             setShippingMethod={setShippingMethod}
             shippingNumber={shippingNumber}

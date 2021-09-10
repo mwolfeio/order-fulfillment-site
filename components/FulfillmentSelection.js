@@ -3,7 +3,6 @@ const Header = (props) => {
   let order = props.order;
   let isFulfilled = order.products.every((prod) => prod.fulfilled);
 
-  console.log("selected FufillmentSelection: ", props.selected);
   return (
     <div>
       <div style={{ margin: "30px 0" }}>

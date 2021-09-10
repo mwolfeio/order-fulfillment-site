@@ -38,7 +38,6 @@ const Header = ({ selected, setSelected, product }) => {
         ].replace("Font_", "")
       : "";
 
-  console.log(imgSrc);
   return (
     <li
       onClick={!product.fulfilled ? setSelected : null}
