@@ -9,7 +9,7 @@ const Header = () => {
   const { user, username } = useContext(UserContext);
   const [filter, setFilter] = useState("All Orders");
 
-  let filters = ["All Orders", "Unfulfilled Orders", "Fulfiller Orders"];
+  let filters = ["All Orders", "Unfulfilled Orders", "Fulfilled Orders"];
 
   return (
     <div className="orders-wrapper">

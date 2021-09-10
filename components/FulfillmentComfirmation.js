@@ -3,7 +3,7 @@ const Header = (props) => {
   return (
     <div>
       <div style={{ margin: "30px 0" }}>
-        <h2>Shipping Informaiton</h2>
+        <h2>Shipping Information</h2>
         <p>
           Please enter the shipping information for this order. This information
           will be sent to the customer.
