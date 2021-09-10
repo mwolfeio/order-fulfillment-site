@@ -68,7 +68,12 @@ export default function Orders(props) {
             if (props.filter === "Fulfiller Orders" && !isFulfilled) return;
             // return JSON.stringify(order);
             return (
-              <ListItem open={openModal} active={!isFulfilled} order={order} />
+              <ListItem
+                key={`${order.number}-fulfillment-key`}
+                open={openModal}
+                active={!isFulfilled}
+                order={order}
+              />
             );
           })}
         </ul>

@@ -18,6 +18,7 @@ const Header = (props) => {
           let active = props.selected.includes(product);
           return (
             <Product
+              key={`${product.name}-fulfillment-key`}
               selected={active}
               setSelected={() => props.setSelected(product)}
               product={product}

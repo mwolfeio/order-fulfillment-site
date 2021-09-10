@@ -6,6 +6,7 @@ const Header = (props) => {
       <div className="flex-center-left tab-wrapper">
         {props.filters.map((filter) => (
           <div
+            key={`${filter}-key`}
             onClick={() => props.handler(filter)}
             className={`tab flex-center-center ${
               filter == props.active ? "active-tab" : ""

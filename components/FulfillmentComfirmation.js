@@ -18,6 +18,7 @@ const Header = (props) => {
       <div className="selector flex-center-btw">
         {shippingMethods.map((shippingMethod) => (
           <div
+            key={`${shippingMethod}-key`}
             className={`flex-center-center ${
               props.shippingMethod === shippingMethod ? "active-method" : ""
             }`}

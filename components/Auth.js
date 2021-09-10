@@ -38,7 +38,7 @@ const Header = () => {
           ""
         )}
         <p className="auth-footer">
-          Don't have an account yet?{"  "}
+          Don&apos;t have an account yet?{"  "}
           <a style={{ marginLeft: "4px" }} href="mailto:matt@mwolfe.io">
             Contact us
           </a>
