@@ -46,7 +46,7 @@ const Header = ({ selected, setSelected, product }) => {
       } ${selected && !product.fulfilled ? "active-product" : ""}`}
     >
       {loading ? (
-        <li>Loading...</li>
+        <h4>Loading...</h4>
       ) : (
         <div className="flex-center-center">
           {!product.fulfilled ? <div className={`checkbox`}></div> : ""}
