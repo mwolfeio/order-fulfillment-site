@@ -34,57 +34,17 @@ const Header = ({ order, close }) => {
             product.fulfilled = true;
           }
         });
-
         return docRef.update({
           products: productsArr,
         });
       })
       .then(() => {
-        console.log("Document successfully updated!");
         setPage(0);
         close();
       })
       .catch((error) => {
         console.log("Error getting document:", error);
       });
-
-    //iterate throguh each product
-
-    //check if it matches a selected products
-
-    //update its inforamion
-
-    //upload the new products array to firebase
-
-    // console.log("submitting");
-    // var batch = firestore.batch();
-    //
-    // //for each product in the selected array
-    // selected.forEach((product, i) => {
-    //   //find the order
-    //   let docRef = firestore.collection("orders").doc(order.number);
-    //   //add shipping numbers and shippin method to product
-    //   product.shippingNumber = shippingNumber;
-    //   product.shippingMethod = shippingMethod;
-    //   product.fulfilled = true;
-    //   //update products fifillment status and shpping code
-    //   batch.update(docRef, product);
-    // });
-    //
-    // //////////////its an array
-    //
-    // //shut modal down
-    // batch
-    //   .commit()
-    //   .then(() => {
-    //     console.log("Documents successfully updated!");
-    //     setPage(0);
-    //     close();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     return res.status(200).json(err);
-    //   });
   };
 
   return (
