@@ -1,75 +1,115 @@
 import { useState } from "react";
+import { gql, useQuery } from "@apollo/client";
 
-const Header = (props) => {
+const GET_PRODUCTS = gql`
+  query getProducts($id: ID!) {
+    node(id: $id) {
+      ... on Product {
+        title
+        images(first: 3, maxWidth: 145, maxHeight: 100) {
+          edges {
+            node {
+              src
+            }
+          }
+        }
+        tags
+      }
+    }
+  }
+`;
+
+const Header = ({ selected, setSelected, product }) => {
   const [active, setActive] = useState(false);
+  const [imgeLoaded, setImageLoaded] = useState(false);
+  const { loading, error, data } = useQuery(GET_PRODUCTS, {
+    fetchPolicy: "no-cache",
+    variables: { id: btoa(`gid://shopify/Product/${product.product_id}`) },
+  });
 
-  // let active = props.selected.includes(props.product);
-  // let active = props.selected[1] == props.product;
-  // let toggle = () => {
-  //   props.toggleSelected(props.product);
-  // };
+  let imgSrc =
+    data && data.node
+      ? data.node.images.edges[1].node.src
+      : "https://i.stack.imgur.com/y9DpT.jpg";
+  let font =
+    data && data.node
+      ? data.node.tags[
+          data.node.tags.findIndex((t) => t.includes("Font_"))
+        ].replace("Font_", "")
+      : "";
 
-  let product = props.product;
-  let font = product.font ? product.font.replace("Font_", "") : "";
-
-  console.log("selected product :", props.selected);
-
+  console.log(imgSrc);
   return (
     <li
-      onClick={!product.fulfilled ? props.setSelected : null}
+      onClick={!product.fulfilled ? setSelected : null}
       className={`flex-center-center order-product ${
         !product.fulfilled ? "not-disabled-product" : ""
-      } ${props.selected && !product.fulfilled ? "active-product" : ""}`}
+      } ${selected && !product.fulfilled ? "active-product" : ""}`}
     >
-      {!product.fulfilled ? <div className={`checkbox`}></div> : ""}
-      <div className="product-img-wrapper">
-        <div className={`tiny-tab ${product.fulfilled ? "disabled-tab" : ""}`}>
-          {!product.fulfilled ? `QT ${product.qt}` : "Fulfilled"}
+      {loading ? (
+        <li>Loading...</li>
+      ) : (
+        <div className="flex-center-center">
+          {!product.fulfilled ? <div className={`checkbox`}></div> : ""}
+
+          <div className="product-img-wrapper">
+            <div
+              className={`tiny-tab ${product.fulfilled ? "disabled-tab" : ""}`}
+            >
+              {!product.fulfilled ? `QT ${product.qt}` : "Fulfilled"}
+            </div>
+            <div
+              style={imgeLoaded ? {} : { visibility: "hidden" }}
+              className={`text-overlay flex-center-center ${font
+                .replace("&", "")
+                .replace(/\s/g, "-")}-font`}
+            >
+              {product.message}
+            </div>
+            <img
+              style={imgeLoaded ? {} : { visibility: "hidden" }}
+              src={imgSrc}
+              onLoad={() => setImageLoaded(true)}
+            />
+          </div>
+
+          <div>
+            <h4>{product.name}</h4>
+            <p>
+              Message:
+              <span
+                style={{ color: "#4388F8", fontWeight: 700, marginLeft: "4px" }}
+              >
+                {product.message}
+              </span>
+            </p>
+            <p>
+              Font:
+              <span
+                style={{ color: "#4388F8", fontWeight: 700, marginLeft: "4px" }}
+              >
+                {font}
+              </span>
+            </p>
+            <p>
+              Sku:{" "}
+              <span
+                style={{ color: "#4388F8", fontWeight: 700, marginLeft: "4px" }}
+              >
+                {product.sku}
+              </span>
+            </p>
+            <p>
+              Quantity:{" "}
+              <span
+                style={{ color: "#4388F8", fontWeight: 700, marginLeft: "4px" }}
+              >
+                {product.qt}
+              </span>
+            </p>
+          </div>
         </div>
-        <div
-          className={`text-overlay flex-center-center ${font
-            .replace("&", "")
-            .replace(/\s/g, "-")}-font`}
-        >
-          {product.message}
-        </div>
-        <img src={product.img} />
-      </div>
-      <div>
-        <h4>{product.name}</h4>
-        <p>
-          Message:
-          <span
-            style={{ color: "#4388F8", fontWeight: 700, marginLeft: "4px" }}
-          >
-            {product.message}
-          </span>
-        </p>
-        <p>
-          Font:
-          <span
-            style={{ color: "#4388F8", fontWeight: 700, marginLeft: "4px" }}
-          >
-            {font}
-          </span>
-        </p>
-        <p>
-          Sku:{" "}
-          <span
-            style={{ color: "#4388F8", fontWeight: 700, marginLeft: "4px" }}
-          >
-            {product.sku}
-          </span>
-        </p>
-        <p>
-          Quantity:{" "}
-          <span
-            style={{ color: "#4388F8", fontWeight: 700, marginLeft: "4px" }}
-          >
-            {product.qt}
-          </span>
-        </p>
-      </div>
+      )}
     </li>
   );
 };

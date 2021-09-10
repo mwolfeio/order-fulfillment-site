@@ -37,7 +37,9 @@ a {
 * {
   box-sizing: border-box;
 }
-
+ul {
+  list-style-type: none;
+}
 main {
   margin: auto;
   width: 100%;

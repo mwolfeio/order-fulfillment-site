@@ -1,15 +1,12 @@
 import { useState } from "react";
-import _ from "lodash";
 import FulfillmentComfirmation from "./FulfillmentComfirmation.js";
 import FulfillmentSelection from "./FulfillmentSelection.js";
 
-const Header = (props) => {
+const Header = ({ order, close }) => {
   const [selected, setSelected] = useState([]);
   const [shippingMethod, setShippingMethod] = useState("DHL");
   const [shippingNumber, setShippingNumber] = useState("");
   const [page, setPage] = useState(0);
-
-  let order = props.order;
 
   const toggleSelected = (product) => {
     setSelected(
@@ -32,7 +29,7 @@ const Header = (props) => {
           <button
             onClick={() => {
               setPage(0);
-              props.close();
+              close();
             }}
             style={{ width: "43px" }}
             className="secondary"
@@ -76,7 +73,7 @@ const Header = (props) => {
             setSelected={toggleSelected}
             close={() => {
               setPage(0);
-              props.close();
+              close();
             }}
             next={() => setPage(1)}
           />
