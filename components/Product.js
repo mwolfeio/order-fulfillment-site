@@ -64,11 +64,15 @@ const Header = ({ selected, setSelected, product }) => {
             )}
             <div
               style={imgeLoaded ? {} : { visibility: "hidden" }}
-              className={`text-overlay flex-center-center ${font
+              className={`text-overlay flex-center-center  ${font
                 .replace("&", "")
                 .replace(/\s/g, "-")}-font`}
             >
-              {product.message}
+              <span
+                className={`${product.sku === "PM105" ? "msg-adjustment" : ""}`}
+              >
+                {product.message}
+              </span>
             </div>
             <img
               style={imgeLoaded ? {} : { visibility: "hidden" }}

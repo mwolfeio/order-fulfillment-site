@@ -219,6 +219,7 @@ header {
   color: #323b4b;
   margin: 0;
 }
+
 .welcome-message p {
   height: 21px;
   font-family: Inter;
@@ -593,6 +594,9 @@ ul.list-contaiener li.list-item p {
   opacity: 0.8;
   font-family: Serif;
   font-weight: 600;
+}
+.product-img-wrapper .msg-adjustment {
+  margin-bottom: -34px;
 }
 .product-img-wrapper .tiny-tab {
   position: absolute;
