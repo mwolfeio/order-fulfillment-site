@@ -11,7 +11,7 @@ const Header = (props) => {
       </div>
       <input
         type="text"
-        placeholder="Enter the shipping number"
+        placeholder="Enter the Tracking number"
         onChange={(e) => props.setShippingNumber(e.target.value)}
         value={props.shippingNumber}
       />

@@ -1,5 +1,6 @@
 import UnFulfilled from "../media/UnFulfilled.js";
 import Fulfilled from "../media/Fulfilled.js";
+import PartlyFulfilled from "../media/PartlyFulfilled.js";
 
 const Header = (props) => {
   let order = props.order;
@@ -8,13 +9,37 @@ const Header = (props) => {
     props.open(order.number);
   };
 
+  let needsFulfilled = !props.percentFulfilled;
+  // 0 = needs fulfillment
+  let partlyFulfilled =
+    props.percentFulfilled < 1 && props.percentFulfilled > 0;
+  // 0-n = partial fulfillment
+  let fulfilled = props.percentFulfilled === 1;
+  // n = fulfilled
+
+  console.log("needsFulfilled: ", needsFulfilled);
+  console.log("partlyFulfilled: ", partlyFulfilled);
+  console.log("fulfilled: ", fulfilled);
+
   return (
     <li
       onClick={selectOrder}
-      className={`list-item ${props.active ? "active-list-item" : ""}`}
+      className={`list-item ${
+        needsFulfilled
+          ? "active-list-item"
+          : partlyFulfilled
+          ? "partly-active-list-item"
+          : ""
+      }`}
     >
       <div className="flex-center-left">
-        {props.active ? <UnFulfilled /> : <Fulfilled />}
+        {needsFulfilled ? (
+          <UnFulfilled />
+        ) : partlyFulfilled ? (
+          <PartlyFulfilled />
+        ) : (
+          <Fulfilled />
+        )}
         <div style={{ marginLeft: "16px" }}>
           <h6>{order.number}</h6>
           <p>Larry Traverso</p>
@@ -46,9 +71,25 @@ const Header = (props) => {
         </p>
       </div>
       <button
-        className={`self-center ${props.active ? "primary" : "secondary"}`}
+        className={`self-center ${
+          needsFulfilled ? "primary" : partlyFulfilled ? "caution" : "secondary"
+        }`}
       >
-        {props.active ? "Fulfill Order" : "Fulfilled"}
+        {partlyFulfilled && (
+          <div
+            className="caution-button-status"
+            style={{ width: `${props.percentFulfilled * 100}%` }}
+          />
+        )}
+        <span style={{ position: "relative", zIndex: 1 }}>
+          {needsFulfilled
+            ? "Fulfill Order"
+            : partlyFulfilled
+            ? `${props.percentFulfilled * order.products.length}/${
+                order.products.length
+              } fulfilled`
+            : "Fulfilled"}
+        </span>
       </button>
     </li>
   );

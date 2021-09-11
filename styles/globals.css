@@ -75,6 +75,8 @@ button {
   /* Icons & Fonts */
   transition: 0.15s ease;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 button:hover {
   box-shadow: 0px 23px 44px rgba(176, 183, 195, 0.14);
@@ -86,6 +88,17 @@ button.primary {
 button.secondary {
   color: #b0b7c3;
   background: #fafbfc;
+}
+button.caution {
+  color: #ffffff;
+  background: #ffe287;
+}
+button .caution-button-status {
+  position: absolute;
+  background: #ffd553;
+  left: 0;
+  top: 0;
+  height: 100%;
 }
 button[disabled] {
   color: #e2e7ef;
@@ -122,6 +135,7 @@ button[disabled]:hover {
   background: #f4f8ff;
   color: #4388f8;
 }
+
 /* Header-------------------- */
 header {
   height: 100px;
@@ -420,6 +434,7 @@ ul.list-contaiener li.list-item p {
 .modal-background {
   position: fixed;
   top: 0;
+  z-index: 10;
   left: 0;
   right: 0;
   height: max(100%, 100vh);
@@ -602,6 +617,12 @@ ul.list-contaiener li.list-item p {
   border-radius: 15px;
 }
 .product-img-wrapper .tiny-tab.disabled-tab {
+  color: #fff;
+  background: #b0b7c3;
+}
+.product-img-wrapper .tiny-tab.tab-reversed {
+  top: auto;
+  bottom: -4px;
   color: #fff;
   background: #b0b7c3;
 }

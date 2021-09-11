@@ -57,6 +57,11 @@ const Header = ({ selected, setSelected, product }) => {
             >
               {!product.fulfilled ? `QT ${product.qt}` : "Fulfilled"}
             </div>
+            {product.fulfilled && (
+              <div className={`tiny-tab tab-reversed disabled-tab" `}>
+                {`TN: ${product.shippingNumber}`}
+              </div>
+            )}
             <div
               style={imgeLoaded ? {} : { visibility: "hidden" }}
               className={`text-overlay flex-center-center ${font

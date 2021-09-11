@@ -59,11 +59,21 @@ export default function Orders(props) {
             <p>order date</p>
             <p>items</p>
             <p>customer</p>
-            <p>Shipping #</p>
+            <p>Tracking #</p>
             <p style={{ justifySelf: "end" }}>Action</p>
           </li>
           {orders.map((order) => {
-            let isFulfilled = order.products.every((prod) => prod.fulfilled);
+            // let isFulfilled = order.products.every((prod) => prod.fulfilled);
+            // let isPartlyFulfilled = order.products.filter((prod) => prod.fulfilled).length > 0
+            let percentFulfilled =
+              order.products.filter((prod) => prod.fulfilled).length /
+              order.products.length;
+            // 0 = needs fulfillment
+            // 0-n = partial fulfillment
+            // n = fulfilled
+
+            // active={!isFulfilled}
+
             if (props.filter === "Unfulfilled Orders" && isFulfilled) return;
             if (props.filter === "Fulfiller Orders" && !isFulfilled) return;
             // return JSON.stringify(order);
@@ -71,7 +81,7 @@ export default function Orders(props) {
               <ListItem
                 key={`${order.number}-fulfillment-key`}
                 open={openModal}
-                active={!isFulfilled}
+                percentFulfilled={percentFulfilled}
                 order={order}
               />
             );
