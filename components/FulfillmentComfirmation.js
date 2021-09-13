@@ -1,5 +1,5 @@
 const Header = (props) => {
-  let shippingMethods = ["DHL", "FedEx", "UPS"];
+  let shippingMethods = ["DHL Express", "FedEx", "UPS"];
   return (
     <div>
       <div style={{ margin: "30px 0" }}>
