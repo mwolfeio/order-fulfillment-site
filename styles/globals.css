@@ -629,6 +629,7 @@ ul.list-contaiener li.list-item p {
   bottom: -4px;
   color: #fff;
   background: #b0b7c3;
+  white-space: nowrap;
 }
 
 .product-img-wrapper .text-overlay.Olivia--Kevin-font {

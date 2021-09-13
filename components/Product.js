@@ -59,7 +59,9 @@ const Header = ({ selected, setSelected, product }) => {
             </div>
             {product.fulfilled && (
               <div className={`tiny-tab tab-reversed disabled-tab" `}>
-                {`${product.shippingMethod}: ${product.shippingNumber}`}
+                {`${product.shippingMethod.replace(" Express", "")}: ${
+                  product.shippingNumber
+                }`}
               </div>
             )}
             <div
