@@ -5,7 +5,7 @@ import FulfillmentSelection from "./FulfillmentSelection.js";
 
 const Header = ({ order, close }) => {
   const [selected, setSelected] = useState([]);
-  const [shippingMethod, setShippingMethod] = useState("DHL");
+  const [shippingMethod, setShippingMethod] = useState("DHL Express");
   const [shippingNumber, setShippingNumber] = useState("");
   const [page, setPage] = useState(0);
 
@@ -80,6 +80,8 @@ const Header = ({ order, close }) => {
               {order.shippingAddress.zip}
               <br />
               {order.shippingAddress.country}
+              <br />
+              Phone:{order.phone}
             </p>
           </div>
           <div className="divider-line"></div>
@@ -93,6 +95,7 @@ const Header = ({ order, close }) => {
               {order.shippingNumber
                 ? `Shipping #: ${order.shippingNumber}`
                 : ""}
+              <br />
               <br />
             </p>
           </div>

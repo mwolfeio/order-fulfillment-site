@@ -63,7 +63,7 @@ export default function Orders(props) {
             <p style={{ justifySelf: "end" }}>Action</p>
           </li>
           {orders.map((order) => {
-            // let isFulfilled = order.products.every((prod) => prod.fulfilled);
+            let isFulfilled = order.products.every((prod) => prod.fulfilled);
             // let isPartlyFulfilled = order.products.filter((prod) => prod.fulfilled).length > 0
             let percentFulfilled =
               order.products.filter((prod) => prod.fulfilled).length /
