@@ -17,10 +17,6 @@ const Header = (props) => {
   let fulfilled = props.percentFulfilled === 1;
   // n = fulfilled
 
-  console.log("needsFulfilled: ", needsFulfilled);
-  console.log("partlyFulfilled: ", partlyFulfilled);
-  console.log("fulfilled: ", fulfilled);
-
   return (
     <li
       onClick={selectOrder}

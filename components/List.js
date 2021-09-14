@@ -64,7 +64,9 @@ export default function Orders(props) {
           </li>
           {orders.map((order) => {
             let isFulfilled = order.products.every((prod) => prod.fulfilled);
-            // let isPartlyFulfilled = order.products.filter((prod) => prod.fulfilled).length > 0
+            console.log("------isFulfilled: ", isFulfilled);
+            console.log("------filter: ", props.filter);
+            console.log("------logic: ", props.filter === "Fulfilled Orders");
             let percentFulfilled =
               order.products.filter((prod) => prod.fulfilled).length /
               order.products.length;
@@ -75,7 +77,7 @@ export default function Orders(props) {
             // active={!isFulfilled}
 
             if (props.filter === "Unfulfilled Orders" && isFulfilled) return;
-            if (props.filter === "Fulfiller Orders" && !isFulfilled) return;
+            if (props.filter === "Fulfilled Orders" && !isFulfilled) return;
             // return JSON.stringify(order);
             return (
               <ListItem
